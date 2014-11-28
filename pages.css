@@ -1,0 +1,11 @@
+/*
+* 	New
+*	v1.0.0
+*/
+
+.data-item {
+    width:50%;
+    height:100%;
+    float:left;
+   	background-color: #000000;
+}

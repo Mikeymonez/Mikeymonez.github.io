@@ -1,1 +1,176 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <link href="pages.css" rel="stylesheet">
+    <link href="bootstrapTheme.css" rel="stylesheet">
+
+
+    <!-- Owl Carousel Assets -->
+    <link href="owl.carousel.css" rel="stylesheet">
+    <link href="owl.theme.css" rel="stylesheet">
+    
+
+  </head>
+  <body>
+
+      <div id="demo">
+        <div class="container">
+          <div class="row">
+            <div class="span12">
+              <div id="owl-demo" class="owl-carousel">
+
+                <div class="item">
+                  
+                  <div id"data-page">
+                    <div class="data-item">
+
+                      <iframe width="1275" height="738" seamless frameborder="0" scrolling="no" src="https://docs.google.com/a/blueflag.com.au/spreadsheets/d/1sVURkMB7mQYD63egJqRmONlwyc-ZPTND4KrP0OzXSHk/pubchart?oid=341387247&amp;format=image"></iframe>
+                      
+                    </div>
+
+                    <div class="data-item">
+
+                      <iframe width="203" height="92" seamless frameborder="0" scrolling="no" src="https://docs.google.com/a/blueflag.com.au/spreadsheets/d/1sVURkMB7mQYD63egJqRmONlwyc-ZPTND4KrP0OzXSHk/pubchart?oid=1488639198&amp;format=interactive"></iframe>
+
+                      <iframe width="209" height="99" seamless frameborder="0" scrolling="no" src="https://docs.google.com/a/blueflag.com.au/spreadsheets/d/1sVURkMB7mQYD63egJqRmONlwyc-ZPTND4KrP0OzXSHk/pubchart?oid=673674444&amp;format=interactive"></iframe>
+
+                      <iframe width="218" height="104" seamless frameborder="0" scrolling="no" src="https://docs.google.com/a/blueflag.com.au/spreadsheets/d/1sVURkMB7mQYD63egJqRmONlwyc-ZPTND4KrP0OzXSHk/pubchart?oid=1761183719&amp;format=interactive"></iframe>
+
+                      <iframe width="893" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/a/blueflag.com.au/spreadsheets/d/1sVURkMB7mQYD63egJqRmONlwyc-ZPTND4KrP0OzXSHk/pubchart?oid=291988970&amp;format=interactive"></iframe>
+
+                    </div>
+                    
+                  </div>
+
+                </div>
+                
+                <div class="item">
+
+                  
+
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script src="jquery-1.9.1.min.js"></script> 
+    <script src="owl.carousel.js"></script>
+
+
+    <!-- Demo -->
+
+    <style>
+    #owl-demo .item img{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    #bar{
+      width: 0%;
+      max-width: 100%;
+      height: 4px;
+      background: #7fc242;
+    }
+    #progressBar{
+      width: 100%;
+      background: #EDEDED;
+    }
+    </style>
+
+
+    <script>
+    $(document).ready(function() {
+
+      var time = 30; // time in seconds
+
+      var $progressBar,
+          $bar, 
+          $elem, 
+          isPause, 
+          tick,
+          percentTime;
+
+        //Init the carousel
+        $("#owl-demo").owlCarousel({
+          slideSpeed : 500,
+          paginationSpeed : 500,
+          singleItem : true,
+          afterInit : progressBar,
+          afterMove : moved,
+          startDragging : pauseOnDragging
+        });
+
+        //Init progressBar where elem is $("#owl-demo")
+        function progressBar(elem){
+          $elem = elem;
+          //build progress bar elements
+          buildProgressBar();
+          //start counting
+          start();
+        }
+
+        //create div#progressBar and div#bar then prepend to $("#owl-demo")
+        function buildProgressBar(){
+          $progressBar = $("<div>",{
+            id:"progressBar"
+          });
+          $bar = $("<div>",{
+            id:"bar"
+          });
+          $progressBar.append($bar).prependTo($elem);
+        }
+
+        function start() {
+          //reset timer
+          percentTime = 0;
+          isPause = false;
+          //run interval every 0.01 second
+          tick = setInterval(interval, 10);
+        };
+
+        function interval() {
+          if(isPause === false){
+            percentTime += 1 / time;
+            $bar.css({
+               width: percentTime+"%"
+             });
+            //if percentTime is equal or greater than 100
+            if(percentTime >= 100){
+              //slide to next item 
+              $elem.trigger('owl.next')
+            }
+          }
+        }
+
+        //pause while dragging 
+        function pauseOnDragging(){
+          isPause = true;
+        }
+
+        //moved callback
+        function moved(){
+          //clear interval
+          clearTimeout(tick);
+          //start again
+          start();
+        }
+
+        //uncomment this to make pause on mouseover 
+        // $elem.on('mouseover',function(){
+        //   isPause = true;
+        // })
+        // $elem.on('mouseout',function(){
+        //   isPause = false;
+        // })
+    });
+    </script>
+
+  </body>
+</html>
